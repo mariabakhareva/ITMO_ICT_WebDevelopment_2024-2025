@@ -4,27 +4,27 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="None">
         
         
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>My Docs</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/fontawesome.min.css" rel="stylesheet">
-        <link href="css/brands.min.css" rel="stylesheet">
-        <link href="css/solid.min.css" rel="stylesheet">
-        <link href="css/v4-font-face.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Простой HTTP-сервер на Python - My Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
         <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
         <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">My Docs</a>
+                <a class="navbar-brand" href="../..">My Docs</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,30 +35,30 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li class="nav-item">
-                                <a href="." class="nav-link active" aria-current="page">Welcome to MkDocs</a>
+                                <a href="../.." class="nav-link">Welcome to MkDocs</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Lr1</a>
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Lr1</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="lr1/task_1/" class="dropdown-item">Сетевое взаимодействие с использованием сокетов в Python</a>
+    <a href="../task_1/" class="dropdown-item">Сетевое взаимодействие с использованием сокетов в Python</a>
 </li>
                                     
 <li>
-    <a href="lr1/task_2/" class="dropdown-item">Сетевое взаимодействие с использованием сокетов в Python (TCP)</a>
+    <a href="../task_2/" class="dropdown-item">Сетевое взаимодействие с использованием сокетов в Python (TCP)</a>
 </li>
                                     
 <li>
-    <a href="lr1/task_3/" class="dropdown-item">Простой HTTP-сервер на Python</a>
+    <a href="./" class="dropdown-item active" aria-current="page">Простой HTTP-сервер на Python</a>
 </li>
                                     
 <li>
-    <a href="lr1/task_4/" class="dropdown-item">Клиент и сервер на Python с использованием сокетов</a>
+    <a href="../task_4/" class="dropdown-item">Клиент и сервер на Python с использованием сокетов</a>
 </li>
                                     
 <li>
-    <a href="lr1/task_5/" class="dropdown-item">Сервер на Python для обработки оценок</a>
+    <a href="../task_5/" class="dropdown-item">Сервер на Python для обработки оценок</a>
 </li>
                                 </ul>
                             </li>
@@ -71,12 +71,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
+                                <a rel="prev" href="../task_2/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="lr1/task_1/" class="nav-link">
+                                <a rel="next" href="../task_4/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -98,13 +98,17 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#welcome-to-mkdocs" class="nav-link">Welcome to MkDocs</a>
+            <li class="nav-item" data-bs-level="1"><a href="#http-python" class="nav-link">Простой HTTP-сервер на Python</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#commands" class="nav-link">Commands</a>
+            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link">Обзор</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#project-layout" class="nav-link">Project layout</a>
+            <li class="nav-item" data-bs-level="2"><a href="#_2" class="nav-link">Требования</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_3" class="nav-link">Код сервера</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -115,20 +119,71 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+<h1 id="http-python">Простой HTTP-сервер на Python</h1>
+<p>В этой документации представлен простой HTTP-сервер на Python, который обслуживает HTML-файл. Сервер принимает HTTP-запросы от клиентов и возвращает содержимое указанного HTML-файла.</p>
+<h2 id="_1">Обзор</h2>
+<p>Этот сервер использует сокеты для создания веб-сервера, который слушает входящие соединения на порту 8080. Когда клиент отправляет запрос, сервер загружает HTML-файл и отправляет его содержимое обратно клиенту. Если файл не найден, сервер возвращает ошибку 404.</p>
+<h2 id="_2">Требования</h2>
+<p>Для запуска приложения убедитесь, что у вас установлен Python. Код использует встроенную библиотеку <code>socket</code> и <code>os</code>, которые доступны в стандартных дистрибутивах Python.</p>
+<h2 id="_3">Код сервера</h2>
+<p>Следующий раздел описывает код HTTP-сервера.</p>
+<h3 id="_4">Код</h3>
+<pre><code>python
+import socket
+import os
+
+# Путь к HTML-файлу
+HTML_FILE = 'index.html'
+
+
+def load_html_file():
+    &quot;&quot;&quot;Загружает содержимое HTML-файла.&quot;&quot;&quot;
+    if not os.path.exists(HTML_FILE):
+        return &quot;HTTP/1.1 404 Not Found\n\n404 Not Found&quot;
+
+    with open(HTML_FILE, 'r') as file:
+        return file.read()
+
+
+def start_server():
+    # Создаем сокет
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind(('localhost', 8080))
+    server_socket.listen(1)
+
+    print(&quot;Сервер запущен и ожидает подключения на порту 8080...&quot;)
+
+    try:
+        while True:
+            conn, addr = server_socket.accept()
+            print(f&quot;Подключено к {addr}&quot;)
+
+            try:
+                request = conn.recv(1024).decode()
+                print(f&quot;Запрос:\n{request}&quot;)
+
+                # Загружаем HTML-страницу
+                html_content = load_html_file()
+                response = &quot;HTTP/1.1 200 OK\n&quot;
+                response += &quot;Content-Type: text/html; charset=utf-8\n&quot;
+                response += &quot;Connection: close\n\n&quot;
+                response += html_content
+
+                # Отправляем ответ
+                conn.sendall(response.encode())
+            except Exception as e:
+                print(f&quot;Ошибка: {e}&quot;)
+            finally:
+                conn.close()
+    except KeyboardInterrupt:
+        print(&quot;\nСервер остановлен.&quot;)
+    finally:
+        server_socket.close()
+
+
+# Запускаем сервер
+start_server()
+
 </code></pre></div>
             </div>
         </div>
@@ -137,13 +192,13 @@ docs/
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
         <script>
-            var base_url = ".",
+            var base_url = "../..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js"></script>
-        <script src="search/main.js"></script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -208,8 +263,3 @@ docs/
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.6.1
-Build Date UTC : 2024-09-29 21:21:16.376358+00:00
--->

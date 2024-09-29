@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Сетевое взаимодействие с использованием сокетов в Python (TCP) - My Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">My Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Welcome to MkDocs</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Lr1</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../task_1/" class="dropdown-item">Сетевое взаимодействие с использованием сокетов в Python</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Сетевое взаимодействие с использованием сокетов в Python (TCP)</a>
+</li>
+                                    
+<li>
+    <a href="../task_3/" class="dropdown-item">Простой HTTP-сервер на Python</a>
+</li>
+                                    
+<li>
+    <a href="../task_4/" class="dropdown-item">Клиент и сервер на Python с использованием сокетов</a>
+</li>
+                                    
+<li>
+    <a href="../task_5/" class="dropdown-item">Сервер на Python для обработки оценок</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../task_1/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../task_3/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#python-tcp" class="nav-link">Сетевое взаимодействие с использованием сокетов в Python (TCP)</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link">Обзор</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_2" class="nav-link">Требования</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_3" class="nav-link">Код Клиента</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_4" class="nav-link">Код Сервера</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="python-tcp">Сетевое взаимодействие с использованием сокетов в Python (TCP)</h1>
+<p>В этой документации представлено два простых приложения на Python, демонстрирующие коммуникацию по протоколу TCP (Transmission Control Protocol): клиент и сервер. Клиент отправляет коэффициенты для квадратного уравнения, а сервер решает уравнение и возвращает результат.</p>
+<h2 id="_1">Обзор</h2>
+<p>TCP — это протокол передачи данных, который обеспечивает надежную передачу сообщений между клиентом и сервером. Эта документация охватывает два основных компонента:</p>
+<ol>
+<li><strong>TCP Клиент</strong>: Клиентское приложение, которое запрашивает у пользователя коэффициенты квадратного уравнения и отправляет их на сервер.</li>
+<li><strong>TCP Сервер</strong>: Серверное приложение, которое принимает коэффициенты, решает квадратное уравнение и возвращает результат клиенту.</li>
+</ol>
+<h2 id="_2">Требования</h2>
+<p>Для запуска приложений убедитесь, что у вас установлен Python. Код использует встроенную библиотеку <code>socket</code>, которая доступна в стандартных дистрибутивах Python, а также библиотеку <code>math</code> для математических операций.</p>
+<h2 id="_3">Код Клиента</h2>
+<p>Следующий раздел описывает код TCP клиента.</p>
+<pre><code>python
+import socket
+
+# Создаем сокет
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect(('localhost', 12345))
+
+try:
+    # Запрашиваем параметры у пользователя
+    a = float(input(&quot;Введите коэффициент a: &quot;))
+    b = float(input(&quot;Введите коэффициент b: &quot;))
+    c = float(input(&quot;Введите коэффициент c: &quot;))
+
+    # Отправляем данные серверу
+    client_socket.send(f&quot;{a} {b} {c}&quot;.encode())
+
+    # Получаем результат от сервера
+    result = client_socket.recv(1024).decode()
+    print(f&quot;Результат: {result}&quot;)
+except KeyboardInterrupt:
+    print(&quot;\nКлиент остановлен.&quot;)
+except Exception as e:
+    print(f&quot;Ошибка: {str(e)}&quot;)
+finally:
+    client_socket.close()
+</code></pre>
+<h2 id="_4">Код Сервера</h2>
+<pre><code>import socket
+import math
+
+def solve_quadratic(a, b, c):
+    D = b ** 2 - 4 * a * c
+    if D &gt; 0:
+        x1 = (-b + math.sqrt(D)) / (2 * a)
+        x2 = (-b - math.sqrt(D)) / (2 * a)
+        return f&quot;Два решения: x1 = {x1}, x2 = {x2}&quot;
+    elif D == 0:
+        x = -b / (2 * a)
+        return f&quot;Одно решение: x = {x}&quot;
+    else:
+        return &quot;Нет действительных решений&quot;
+
+# Создаем сокет
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind(('localhost', 12345))
+server_socket.listen(1)
+
+print(&quot;Сервер запущен и ожидает подключения...&quot;)
+
+try:
+    while True:
+        conn, addr = server_socket.accept()
+        print(f&quot;Подключено к {addr}&quot;)
+
+        try:
+            data = conn.recv(1024).decode()
+            a, b, c = map(float, data.split())
+            result = solve_quadratic(a, b, c)
+            conn.send(result.encode())
+        except Exception as e:
+            conn.send(f&quot;Ошибка: {str(e)}&quot;.encode())
+        finally:
+            conn.close()
+except KeyboardInterrupt:
+    print(&quot;\nСервер остановлен.&quot;)
+finally:
+    server_socket.close()
+
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
