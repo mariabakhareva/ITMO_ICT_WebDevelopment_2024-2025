@@ -1,10 +1,13 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Django App{% endblock %}</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -15,6 +18,7 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'assignments:register' %}">Register</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'assignments:my_grades' %}">My Grades</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'assignments:task_list' %}">Tasks</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'assignments:logout' %}">Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -24,7 +28,25 @@
                 <div class="alert alert-{{ message.tags }}">{{ message }}</div>
             {% endfor %}
         {% endif %}
-        {% block content %}{% endblock %}
+
+        {% block content %}
+        <div class="text-center mt-5">
+            <img src="{% static 'images/winx_school.jpg' %}" alt="Winx School" class="img-fluid rounded mb-4" style="max-width: 70%;">
+            <h1>Welcome to Winx School</h1>
+            <p class="lead">
+                Dive into a magical world of knowledge and adventures! Winx School offers a unique blend of academic learning
+                and magical training, helping students reach their full potential.
+            </p>
+            <div class="d-flex justify-content-center mt-4">
+                <a href="{% url 'assignments:task_list' %}" class="btn btn-primary mx-2">View Tasks</a>
+                <a href="{% url 'assignments:my_grades' %}" class="btn btn-secondary mx-2">My Grades</a>
+                <!-- Кнопка для администратора -->
+                {% if user.is_authenticated and user.is_superuser %}
+                    <a href="{% url 'assignments:admin_grades' %}" class="btn btn-danger mx-2">I am Faragonda</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endblock %}
     </div>
 </body>
 </html>

@@ -81,7 +81,7 @@ def submit_assignment(request, task_id):
 
     # Если задание уже отправлено, перенаправляем пользователя
     if assignment and assignment.status == 'submitted':
-        messages.info(request, 'Вы уже отправили это задание.')
+        messages.info(request, 'You have already submitted this task')
         return redirect('assignments:task_list')
 
     # Если форма отправлена
@@ -98,7 +98,7 @@ def submit_assignment(request, task_id):
             assignment.submission_date = timezone.now()
             assignment.save()
 
-            messages.success(request, 'Задание успешно отправлено!')
+            messages.success(request, 'Submitted!')
             return redirect('assignments:task_list')
     else:
         form = AssignmentSubmissionForm(instance=assignment)

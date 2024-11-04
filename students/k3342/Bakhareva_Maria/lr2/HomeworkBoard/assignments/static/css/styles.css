@@ -1,0 +1,123 @@
+body {
+    font-family: serif;
+    background-color: #fbeaf0; /* Светло-розовый фоновый цвет */
+    color: #4b3f53; /* Темно-фиолетовый цвет текста */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #eac3df; /* Пастельный фиолетовый для навигационной панели */
+    border-bottom: 2px solid #d2a4c5;
+}
+
+.navbar-brand, .nav-link {
+    color: #4b3f53; /* Темно-фиолетовый */
+}
+
+.nav-link:hover {
+    color: #6d5f7b; /* Немного светлее при наведении */
+}
+
+/* Header styles */
+header h1 {
+    color: #4b3f53; /* Темно-фиолетовый цвет для заголовков */
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #d2a4c5; /* Пастельный розовый цвет для кнопок */
+    border-color: #c490b2;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #c490b2; /* Потемнее при наведении */
+    border-color: #b37a9b;
+}
+
+/* Container */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Form styles */
+form {
+    background-color: #f7eaf4; /* Светло-розовый для фона формы */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    color: #4b3f53;
+}
+
+form input, form textarea, form select {
+    border: 1px solid #d2a4c5;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Alerts */
+.alert {
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4e4d7; /* Пастельно-зеленый для успеха */
+    color: #3d5948;
+}
+
+.alert-danger, .alert-error {
+    background-color: #f7d6dc; /* Пастельно-красный для ошибок */
+    color: #944d55;
+}
+
+/* Footer */
+footer {
+    background-color: #eac3df;
+    padding: 10px;
+    text-align: center;
+    color: #4b3f53;
+    font-size: 0.9em;
+}
+
+/* Task and grade list styles */
+.task-item, .grade-item {
+    background-color: #f7eaf4;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 5px solid #d2a4c5;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #d2a4c5;
+    text-align: left;
+}
+
+table th {
+    background-color: #eac3df;
+    color: #4b3f53;
+}
+
+table tr:nth-child(even) {
+    background-color: #f7eaf4;
+}

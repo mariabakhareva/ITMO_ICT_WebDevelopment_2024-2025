@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Отправка Задания</title>
+    <title>Assignment Submission</title>
 </head>
 <body>
     {% extends 'base.html' %}
 
     {% block content %}
     <div class="container">
-        <h1>Отправка задания: {{ task.title }}</h1>
+        <h1>Fill in the text to submit the assignment: {{ task.title }}</h1>
 
         {% if messages %}
             <ul class="messages">
@@ -24,8 +24,8 @@
             {% csrf_token %}
             {{ form.as_p }}
 
-            <button type="submit" class="btn btn-primary">Отправить задание</button>
-            <a href="{% url 'assignments:task_list' %}" class="btn btn-secondary">Вернуться к списку заданий</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="{% url 'assignments:task_list' %}" class="btn btn-secondary">Return to the tasklist</a>
         </form>
     </div>
     {% endblock %}
