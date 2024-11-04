@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Grades{% endblock %}
+
+{% block content %}
+<h2>All Student Grades</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Task</th>
+            <th>Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for assignment in assignments %}
+            <tr>
+                <td>{{ assignment.student.name }}</td>
+                <td>{{ assignment.task.title }}</td>
+                <td>{{ assignment.grade }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

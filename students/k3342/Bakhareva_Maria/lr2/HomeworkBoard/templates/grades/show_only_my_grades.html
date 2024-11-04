@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}My Grades{% endblock %}
+
+{% block content %}
+<h2>My Grades</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Task</th>
+            <th>Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for assignment in graded_assignments %}
+            <tr>
+                <td>{{ assignment.task.title }}</td>
+                <td>{{ assignment.grade }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
