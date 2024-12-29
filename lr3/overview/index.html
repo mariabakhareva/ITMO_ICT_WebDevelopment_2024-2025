@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Описание Проекта - My Docs</title>
+        <title>REST API для управления медицинским приложением - My Docs</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/fontawesome.min.css" rel="stylesheet">
         <link href="../../css/brands.min.css" rel="stylesheet">
@@ -63,40 +63,40 @@
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Lr2</a>
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Lr2</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../" class="dropdown-item">Доска Заданий</a>
+    <a href="../../lr2/" class="dropdown-item">Доска Заданий</a>
 </li>
                                     
 <li>
-    <a href="../forms/" class="dropdown-item">Forms</a>
+    <a href="../../lr2/forms/" class="dropdown-item">Forms</a>
 </li>
                                     
 <li>
-    <a href="../models/" class="dropdown-item">Модели</a>
+    <a href="../../lr2/models/" class="dropdown-item">Модели</a>
 </li>
                                     
 <li>
-    <a href="./" class="dropdown-item active" aria-current="page">Описание Проекта</a>
+    <a href="../../lr2/project_review/" class="dropdown-item">Описание Проекта</a>
 </li>
                                     
 <li>
-    <a href="../views/" class="dropdown-item">Views</a>
+    <a href="../../lr2/views/" class="dropdown-item">Views</a>
 </li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Lr3</a>
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Lr3</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../../lr3/endpoints_description/" class="dropdown-item">Документация по эндпоинтам API</a>
+    <a href="../endpoints_description/" class="dropdown-item">Документация по эндпоинтам API</a>
 </li>
                                     
 <li>
-    <a href="../../lr3/overview/" class="dropdown-item">REST API для управления медицинским приложением</a>
+    <a href="./" class="dropdown-item active" aria-current="page">REST API для управления медицинским приложением</a>
 </li>
                                 </ul>
                             </li>
@@ -109,12 +109,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../models/" class="nav-link">
+                                <a rel="prev" href="../endpoints_description/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../views/" class="nav-link">
+                                <a rel="next" class="nav-link disabled">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -136,12 +136,8 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">Описание Проекта</a>
+            <li class="nav-item" data-bs-level="1"><a href="#rest-api" class="nav-link">REST API для управления медицинским приложением</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#_2" class="nav-link">Основные компоненты</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
         </ul>
@@ -149,14 +145,53 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="_1">Описание Проекта</h1>
-<h2 id="_2">Основные компоненты</h2>
+<h1 id="rest-api">REST API для управления медицинским приложением</h1>
+<h3 id="crud-">Реализованы CRUD-операции</h3>
 <ul>
-<li><strong>models.py</strong>: Определяет модели базы данных для студентов, классов, задач и заданий.</li>
-<li><strong>forms.py</strong>: Определяет формы для регистрации, входа в систему и отправки заданий.</li>
-<li><strong>views.py</strong>: Определяет бизнес-логику для представлений.</li>
-<li><strong>urls.py</strong>: Настройка маршрутов для всех страниц.</li>
-<li><strong>templates/</strong>: Шаблоны HTML для каждой страницы приложения.</li>
+<li><strong>Реализованы для всех ключевых моделей</strong>:</li>
+<li><code>Patient</code></li>
+<li><code>MedicalRecord</code></li>
+<li><code>Diagnosis</code></li>
+<li><code>Service</code></li>
+<li><code>Doctor</code></li>
+<li><code>ConsultingRoom</code></li>
+<li><code>Visit</code></li>
+<li><code>DoctorSchedule</code></li>
+<li>
+<p><code>Payment</code></p>
+</li>
+<li>
+<p><strong>Эндпоинты поддерживают</strong>:</p>
+</li>
+<li>Получение списка записей.</li>
+<li>Получение конкретной записи по ID.</li>
+<li>Создание, обновление и удаление записей.</li>
+</ul>
+<h3 id="_1">Кастомные отчёты</h3>
+<ol>
+<li><strong>Отчёт 1</strong>: Список пациентов конкретного врача с датами и стоимостью их визитов.</li>
+<li><strong>Отчёт 2</strong>: Телефоны пациентов, которые посещали отоларинголога и родились после 1987 года.</li>
+<li><strong>Отчёт 3</strong>: Список врачей, работающих в указанный день.</li>
+<li><strong>Отчёт 4</strong>: Количество визитов по датам.</li>
+<li><strong>Отчёт 5</strong>: Суммарная стоимость лечения пациентов, сгруппированная по дням и врачам.</li>
+<li><strong>Отчёт 6</strong>: Список пациентов, которые уже оплатили лечение.</li>
+<li><strong>Отчёт 7</strong>: Подробный отчёт о работе врачей за указанный период, включая общий доход и информацию о визитах.</li>
+</ol>
+<h3 id="_2">Использование связей между моделями</h3>
+<ul>
+<li>Предварительная загрузка связанных данных (<code>services</code>, <code>visits</code> и т.д.) через <code>prefetch_related</code> и <code>select_related</code> улучшает производительность.</li>
+<li>Агрегации (<code>annotate</code>, <code>aggregate</code>) используются для подсчёта стоимости визитов и других аналитических данных.</li>
+</ul>
+<h3 id="_3">Валидация и права доступа</h3>
+<ul>
+<li>Применяется <code>permissions.IsAuthenticated</code>, что обеспечивает безопасность API, требуя аутентификации пользователя.</li>
+<li>Валидация данных через сериализаторы предотвращает запись некорректной информации.</li>
+</ul>
+<h3 id="_4">Обработка ошибок</h3>
+<ul>
+<li>Корректная обработка ошибок, например:</li>
+<li>Возврат <code>404</code> для несуществующих записей.</li>
+<li>Возврат <code>400</code> для некорректных запросов.</li>
 </ul></div>
             </div>
         </div>
