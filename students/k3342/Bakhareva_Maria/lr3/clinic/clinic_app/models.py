@@ -66,7 +66,7 @@ class ConsultingRoom(models.Model):
 
 class Visit(models.Model):
     visit_id = models.AutoField(primary_key=True)
-    record = models.ForeignKey(MedicalRecord, on_delete=models.CASCADE, related_name='visits')
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='visits')
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='visits')
     room = models.ForeignKey(ConsultingRoom, on_delete=models.SET_NULL, null=True, related_name='visits')
     visit_date = models.DateField()
@@ -75,6 +75,10 @@ class Visit(models.Model):
     current_state = models.TextField(blank=True)
     treatment_recommendations = models.TextField(blank=True)
     services = models.ManyToManyField(Service, related_name='visits')  # Many-to-Many Field
+
+    @property
+    def total_cost(self):
+        return sum(service.price for service in self.services.all())
 
     def __str__(self):
         return f"Visit #{self.visit_id} on {self.visit_date} by Dr. {self.doctor.last_name}"

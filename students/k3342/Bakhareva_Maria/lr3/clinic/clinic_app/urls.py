@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
     # CRUD для пациентов
     path('patients/', views.patient_list, name='patient-list'),
@@ -42,7 +43,7 @@ urlpatterns = [
     path('reports/patients-of-doctor/<int:doctor_id>/', views.patients_of_doctor, name='patients-of-doctor'),
     path('reports/ent-patients-after-1987/', views.ent_patients_after_1987, name='ent-patients-after-1987'),
     path('reports/doctors-working-on-day/<str:day>/', views.doctors_working_on_day, name='doctors-working-on-day'),
-    path('reports/visits-count-by-date/', views.visits_count_by_date, name='visits-count-by-date'),
+    path('reports/visits-count-by-date/<str:day>/', views.visits_count_by_date, name='visits-count-by-date'),
     path('reports/total-cost-by-day-and-doctor/', views.total_cost_by_day_and_doctor, name='total-cost-by-day-and-doctor'),
     path('reports/paid-patients-list/', views.paid_patients_list, name='paid-patients-list'),
     path('reports/doctor-report/<str:start_date>/<str:end_date>/', views.doctor_report, name='doctor-report'),

@@ -24,7 +24,7 @@ class ServiceSerializer(serializers.ModelSerializer):
         fields = ['service_id', 'name', 'description', 'price']
 
 class DoctorSerializer(serializers.ModelSerializer):
-    services = ServiceSerializer(many=True)  # Many-to-Many Field
+    services = serializers.PrimaryKeyRelatedField(queryset=Service.objects.all(), many=True)
 
     class Meta:
         model = Doctor
@@ -35,35 +35,35 @@ class DoctorSerializer(serializers.ModelSerializer):
         ]
 
 class ConsultingRoomSerializer(serializers.ModelSerializer):
-    responsible_doctor = DoctorSerializer()
+    responsible_doctor = serializers.PrimaryKeyRelatedField(queryset=Doctor.objects.all())  # Только ID
 
     class Meta:
         model = ConsultingRoom
         fields = ['room_id', 'responsible_doctor', 'phone_number', 'work_date', 'work_start_time', 'work_end_time']
 
 class VisitSerializer(serializers.ModelSerializer):
-    record = MedicalRecordSerializer()
-    doctor = DoctorSerializer()
-    room = ConsultingRoomSerializer()
-    diagnoses = DiagnosisSerializer(many=True)  # Many-to-Many Field
-    services = ServiceSerializer(many=True)    # Many-to-Many Field
+    patient = serializers.PrimaryKeyRelatedField(queryset=Patient.objects.all())  # Only ID
+    doctor = serializers.PrimaryKeyRelatedField(queryset=Doctor.objects.all())  # Only ID
+    room = serializers.PrimaryKeyRelatedField(queryset=ConsultingRoom.objects.all())  # Only ID
+    diagnoses = serializers.PrimaryKeyRelatedField(queryset=Diagnosis.objects.all(), many=True)  # Only ID for many
+    services = serializers.PrimaryKeyRelatedField(queryset=Service.objects.all(), many=True)  # Only ID for many
 
     class Meta:
         model = Visit
         fields = [
-            'visit_id', 'record', 'doctor', 'room', 'visit_date', 'visit_time',
+            'visit_id', 'patient', 'doctor', 'room', 'visit_date', 'visit_time',
             'diagnoses', 'current_state', 'treatment_recommendations', 'services'
         ]
 
 class DoctorScheduleSerializer(serializers.ModelSerializer):
-    doctor = DoctorSerializer()
+    doctor = serializers.PrimaryKeyRelatedField(queryset=Doctor.objects.all())  # Используем ID для врача
 
     class Meta:
         model = DoctorSchedule
         fields = ['schedule_id', 'doctor', 'work_date', 'work_start_time', 'work_end_time']
 
 class PaymentSerializer(serializers.ModelSerializer):
-    visit = VisitSerializer()
+    visit = serializers.PrimaryKeyRelatedField(queryset=Visit.objects.all())  # Используем ID для врача
 
     class Meta:
         model = Payment

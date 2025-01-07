@@ -398,10 +398,13 @@ def payment_detail(request, pk):
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def patients_of_doctor(request, doctor_id):
-    patients = Patient.objects.filter(visit__doctor_id=doctor_id).annotate(
-        visit_date=F('visit__date'),
-        visit_cost=F('visit__total_cost')
+    # Используем аннотирование для добавления данных о визитах (дата визита и стоимость)
+    patients = Patient.objects.filter(visits__doctor_id=doctor_id).annotate(
+        visit_date=F('visits__visit_date'),  # Поле с датой визита
+        visit_cost=Sum('visits__services__price')  # Суммируем цену всех услуг для визита
     ).order_by('last_name', 'first_name')
+
+    # Формируем ответ с нужной информацией
     data = [
         {
             "patient_name": f"{patient.last_name} {patient.first_name}",
@@ -410,47 +413,75 @@ def patients_of_doctor(request, doctor_id):
         }
         for patient in patients
     ]
+
     return Response(data)
 
 ### 2. Телефоны пациентов, посещавших отоларингологов и рожденных после 1987 года
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def ent_patients_after_1987(request):
+    # Фильтруем пациентов по специализации врача и году рождения
     patients = Patient.objects.filter(
-        visit__doctor__specialization='Отоларинголог',
-        date_of_birth__year__gt=1987
+        visits__doctor__specialization='Отоларинголог',
+        birth_date__year__gt=1987
     ).values('phone_number').distinct()
+
     return Response(list(patients))
 
 ### 3. Список врачей, работающих в указанный день
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def doctors_working_on_day(request, day):
-    doctors = Doctor.objects.filter(schedule__day_of_week=day).distinct()
+    # Фильтрация расписания врачей по дате
+    doctor_schedules = DoctorSchedule.objects.filter(work_date=day)  # Фильтруем по дате
+
+    # Получаем уникальных врачей, работающих в этот день
+    doctors = Doctor.objects.filter(schedule__in=doctor_schedules).distinct()  # Связываем врачей с расписанием
+
+    # Сериализация и возврат данных
     serializer = DoctorSerializer(doctors, many=True)
     return Response(serializer.data)
 
 ### 4. Количество приемов пациентов по датам
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
-def visits_count_by_date(request):
-    visits = Visit.objects.values('date').annotate(total_visits=Count('id')).order_by('date')
+def visits_count_by_date(request, day):
+    # Получаем визиты для данной даты
+    visits = Visit.objects.filter(visit_date=day).values('visit_date').annotate(
+        total_visits=Count('visit_id')).order_by('visit_date')
+
     return Response(list(visits))
 
 ### 5. Суммарная стоимость лечения пациентов по дням и по врачам
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def total_cost_by_day_and_doctor(request):
-    costs = Visit.objects.values('date', 'doctor__last_name').annotate(
-        total_cost=Sum('total_cost')
-    ).order_by('date', 'doctor__last_name')
-    return Response(list(costs))
+    # Получаем все визиты
+    visits = Visit.objects.all()
+
+    # Создаем список для хранения результатов
+    result = []
+
+    # Группируем визиты по дате и врачу
+    for visit in visits.values('visit_date', 'doctor__last_name').distinct():
+        doctor_visits = visits.filter(visit_date=visit['visit_date'], doctor__last_name=visit['doctor__last_name'])
+
+        # Суммируем стоимость услуг для всех визитов данного врача на указанную дату
+        total_cost = sum(visit.total_cost for visit in doctor_visits)
+
+        result.append({
+            'visit_date': visit['visit_date'],
+            'doctor_last_name': visit['doctor__last_name'],
+            'total_cost': total_cost
+        })
+
+    return Response(result)
 
 ### 6. Список пациентов, уже оплативших лечение
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def paid_patients_list(request):
-    patients = Patient.objects.filter(visit__payment__isnull=False).distinct()
+    patients = Patient.objects.filter(visits__payments__isnull=False).distinct()
     serializer = PatientSerializer(patients, many=True)
     return Response(serializer.data)
 
@@ -458,19 +489,19 @@ def paid_patients_list(request):
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def doctor_report(request, start_date, end_date):
-    doctors = Doctor.objects.prefetch_related('visit_set').filter(
-        visit__date__range=[start_date, end_date]
+    doctors = Doctor.objects.prefetch_related('visits').filter(
+        visits__visit_date__range=[start_date, end_date]  # Фильтруем по датам визитов
     ).distinct()
 
     report = []
     for doctor in doctors:
-        visits = doctor.visit_set.filter(date__range=[start_date, end_date])
-        total_income = visits.aggregate(total_income=Sum('total_cost'))['total_income']
+        visits = doctor.visits.filter(visit_date__range=[start_date, end_date])  # Получаем визиты за указанный период
+        total_income = visits.aggregate(total_income=Sum('services__price'))['total_income']  # Суммируем цену услуг
         visit_details = [
             {
                 "patient": f"{visit.patient.last_name} {visit.patient.first_name}",
                 "diagnosis": [diag.name for diag in visit.diagnoses.all()],
-                "cost": visit.total_cost
+                "cost": sum(service.price for service in visit.services.all())  # Считаем общую стоимость для каждого визита
             }
             for visit in visits
         ]
