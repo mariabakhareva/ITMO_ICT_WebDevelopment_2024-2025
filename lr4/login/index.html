@@ -198,25 +198,17 @@
 </ol>
 <h3 id="_3">Работа с токеном</h3>
 <p>Для аутентификации и взаимодействия с сервером используется токен, который хранится в <code>localStorage</code> и добавляется в заголовки запросов с помощью интерцептора.</p>
-<ol>
-<li><strong>Сервис <code>TokenStore</code></strong>:</li>
-<li>Сервис <code>TokenStore</code> предоставляет методы для работы с токеном в <code>localStorage</code>:<ul>
-<li><code>getToken</code>: извлекает токен из <code>localStorage</code>.</li>
-<li><code>setToken</code>: сохраняет токен в <code>localStorage</code>.</li>
-<li><code>clearToken</code>: удаляет токен из <code>localStorage</code>.</li>
-</ul>
-</li>
-</ol>
+<p><strong>Сервис <code>TokenStore</code></strong>:
+   - Сервис <code>TokenStore</code> предоставляет методы для работы с токеном в <code>localStorage</code>:
+     - <code>getToken</code>: извлекает токен из <code>localStorage</code>.
+     - <code>setToken</code>: сохраняет токен в <code>localStorage</code>.
+     - <code>clearToken</code>: удаляет токен из <code>localStorage</code>.</p>
 <p>Токен хранится под ключом <code>authToken</code>.</p>
+<p><strong>Интерцептор Axios</strong>:
+   - Для автоматического добавления токена в заголовки всех исходящих запросов используется интерцептор <code>axiosInstance</code>. Этот интерцептор перехватывает все запросы, проверяет наличие токена в <code>localStorage</code>, и если токен найден, добавляет его в заголовки запросов в формате <code>Authorization: Token &lt;token&gt;</code>.
+   - Это позволяет обеспечить аутентификацию при каждом запросе, не требуя вручную добавлять токен в каждый запрос.</p>
 <ol>
-<li><strong>Интерцептор Axios</strong>:</li>
-<li>Для автоматического добавления токена в заголовки всех исходящих запросов используется интерцептор <code>axiosInstance</code>. Этот интерцептор перехватывает все запросы, проверяет наличие токена в <code>localStorage</code>, и если токен найден, добавляет его в заголовки запросов в формате <code>Authorization: Token &lt;token&gt;</code>.</li>
-<li>
-<p>Это позволяет обеспечить аутентификацию при каждом запросе, не требуя вручную добавлять токен в каждый запрос.</p>
-</li>
-<li>
-<p><strong>Axios Instance</strong>:</p>
-</li>
+<li><strong>Axios Instance</strong>:</li>
 <li>Конфигурация для использования <code>axios</code> с предустановленным базовым URL (<code>http://127.0.0.1:8000/api/v1/</code>) и интерцептором для авторизации запросов.</li>
 </ol></div>
             </div>
